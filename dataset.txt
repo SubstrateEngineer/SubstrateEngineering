@@ -1,0 +1,71 @@
+RAW EVENT DATASET
+
+```
+user_4f92b — 2025-06-12T10:00:00+09:00 — page_viewed: homepage
+user_7d3a1 — 2025-06-15T14:00:00Z — email_link_clicked
+user_3n7k2 — 2025-06-25T19:00:00+01:00 — ad_clicked
+user_4f92b — 2025-06-12T10:15:00+09:00 — ProductSearched: "running shoes"
+user_9c6e8 — 2025-06-20T09:00:00-05:00 — PageView: /home
+user_8m4p1 — 2025-06-27T14:30:00+05:30 — site_entered
+user_4f92b — 2025-06-12T10:30:00+09:00 — product_detail_viewed
+user_7d3a1 — 2025-06-15T14:20:00Z — CollectionViewed: "Summer"
+user_3n7k2 — 2025-06-25T19:10:00+01:00 — product_viewed: "Luxury Watch $899"
+user_2k8m5 — 2025-06-18T15:00:00+10:00 — ad_clicked
+user_5r9w7 — 2025-06-28T11:00:00-03:00 — email_clicked
+user_4f92b — 2025-06-12T10:45:00+09:00 — AddToCart: qty 1
+user_8m4p1 — 2025-06-27T14:33:00+05:30 — search_performed: "phone case"
+user_7d3a1 — 2025-06-15T14:35:00Z — cart_item_added
+user_9c6e8 — 2025-06-20T09:20:00-05:00 — add_to_cart: qty 2
+user_3n7k2 — 2025-06-25T19:25:00+01:00 — product_viewed: "Designer Bag $1,200"
+user_1d6t4 — 2025-06-29T09:00:00+08:00 — PageView: /home
+user_2k8m5 — 2025-06-18T15:15:00+10:00 — category_browsed
+user_5r9w7 — 2025-06-28T11:15:00-03:00 — category_browsed: "Electronics"
+user_4f92b — 2025-06-12T11:00:00+09:00 — order_completed: $129.99
+user_8m4p1 — 2025-06-27T14:36:00+05:30 — product_clicked: "Basic Phone Case $12.99"
+user_7d3a1 — 2025-06-15T14:50:00Z — checkout_initiated
+user_3n7k2 — 2025-06-25T19:40:00+01:00 — product_viewed: "Premium Headphones $450"
+user_7h3b9 — 2025-06-30T18:00:00-06:00 — ad_clicked
+user_6h1n9 — 2025-06-22T20:00:00-07:00 — site_entered
+user_1d6t4 — 2025-06-29T09:10:00+08:00 — search_performed: "office chair"
+user_2k8m5 — 2025-06-18T15:30:00+10:00 — Item_Added_To_Cart
+user_9c6e8 — 2025-06-20T09:35:00-05:00 — cart_updated: qty -1
+user_5r9w7 — 2025-06-28T11:30:00-03:00 — Item_Added_To_Cart: "Wireless Mouse $45"
+user_8m4p1 — 2025-06-27T14:38:00+05:30 — add_to_cart: qty 1
+user_7d3a1 — 2025-06-15T14:55:00Z — session_abandoned: payment_page
+user_3n7k2 — 2025-06-25T19:55:00+01:00 — ReviewsRead: all 3 products
+user_6h1n9 — 2025-06-22T20:10:00-07:00 — search_performed: "headphones"
+user_7h3b9 — 2025-06-30T18:15:00-06:00 — category_browsed: "Fitness"
+user_1d6t4 — 2025-06-29T09:20:00+08:00 — AddToCart: "Office Chair $199"
+user_2k8m5 — 2025-06-18T15:45:00+10:00 — checkout_started
+user_9c6e8 — 2025-06-20T09:50:00-05:00 — CouponApplied: SAVE20
+user_5r9w7 — 2025-06-28T11:45:00-03:00 — add_to_cart: "USB Hub $29"
+user_8m4p1 — 2025-06-27T14:40:00+05:30 — Order_Completed: $12.99
+user_3n7k2 — 2025-06-25T20:10:00+01:00 — comparison_tool_used
+user_2k8m5 — 2025-06-18T15:50:00+10:00 — checkout_abandoned: shipping_step
+user_6h1n9 — 2025-06-22T20:25:00-07:00 — multiple_products_viewed: count 3
+user_7h3b9 — 2025-06-30T18:30:00-06:00 — Item_Added_To_Cart: "Yoga Mat $65"
+user_1d6t4 — 2025-06-29T09:25:00+08:00 — checkout_initiated
+user_9c6e8 — 2025-06-20T10:00:00-05:00 — purchase_complete: $79.99
+user_5r9w7 — 2025-06-28T12:00:00-03:00 — cart_item_added: "Keyboard $85"
+user_3n7k2 — 2025-06-25T20:25:00+01:00 — session_ended
+user_6h1n9 — 2025-06-22T20:40:00-07:00 — ReviewsRead
+user_7h3b9 — 2025-06-30T18:40:00-06:00 — cart_updated: qty +2
+user_1d6t4 — 2025-06-29T09:30:00+08:00 — purchase_complete: $199
+user_2k8m5 — 2025-06-19T10:00:00+10:00 — abandonment_email_sent
+user_5r9w7 — 2025-06-28T12:15:00-03:00 — cart_item_added: "Monitor Stand $120"
+user_6h1n9 — 2025-06-22T20:45:00-07:00 — session_ended
+user_7h3b9 — 2025-06-30T18:50:00-06:00 — cart_item_removed: "Yoga Mat"
+user_1d6t4 — 2025-06-29T15:45:00+08:00 — site_entered
+user_2k8m5 — 2025-06-19T10:15:00+10:00 — email_clicked: cart_recovery
+user_5r9w7 — 2025-06-28T12:30:00-03:00 — checkout_started
+user_7h3b9 — 2025-06-30T19:00:00-06:00 — add_to_cart: "Resistance Bands $35"
+user_1d6t4 — 2025-06-29T15:50:00+08:00 — product_viewed: "Desk Lamp $89"
+user_2k8m5 — 2025-06-19T10:30:00+10:00 — Order_Completed: $159.99
+user_5r9w7 — 2025-06-28T12:35:00-03:00 — session_abandoned: cart_page
+user_7h3b9 — 2025-06-30T19:10:00-06:00 — cart_updated: qty -1
+user_1d6t4 — 2025-06-29T15:55:00+08:00 — add_to_cart: qty 1
+user_7h3b9 — 2025-06-30T19:15:00-06:00 — AddToCart: "Yoga Mat $65"
+user_1d6t4 — 2025-06-29T16:00:00+08:00 — Order_Completed: $89
+user_7h3b9 — 2025-06-30T19:25:00-06:00 — CouponApplied: FIT20
+user_7h3b9 — 2025-06-30T19:30:00-06:00 — checkout_started
+user_7h3b9 — 2025-06-30T19:35:00-06:00 — purchase_complete: $80
