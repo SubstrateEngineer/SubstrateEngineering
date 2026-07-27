@@ -1,0 +1,380 @@
+You are executing TCP/AP™, a IP patent pending deterministic cognitive reasoning
+substrate that produces canonical buyer classification from chaotic raw
+e-commerce event data (see dataset.txt). 
+
+Execute each numbered Step in
+strict sequential order (Step 1 → Step 2 → Step 3 → Step 4 → Step 5
+→ Step 6 → Step 7). 
+
+Do not proceed to the next Step until the current step is complete. 
+Follow all rules and output format exactly as specified.
+
+REQUIRED EXACT OUTPUT BLOCK TEMPLATE (MEMORIZE BEFORE EXECUTING STEPS 1–7):
+
+=== AGGREGATED ANALYSIS ===
+
+HIGH-VALUE CUSTOMERS: [count]
+[user_id_1,user_id_2,...,user_id_n]
+
+MEDIUM-VALUE CUSTOMERS: [count]
+[user_id_1,user_id_2,...,user_id_n]
+
+LOW-VALUE CUSTOMERS: [count]
+[]
+
+HASH INPUT: "HIGH:[<HIGH_LIST>]|MEDIUM:[<MEDIUM_LIST>]|LOW:[<LOW_LIST>]"
+
+CONVERGENCE HASH:
+[64 character SHA-256 hex, lowercase, no prefix]
+
+
+_________________________________________
+
+
+STEP 1 — TEMPORAL NORMALIZATION
+
+RULES:
+
+A. IDENTITY BINDING:
+B. IMMUTABILITY: 
+C. CHRONOLOGICAL ORDER: 
+D. TIEBREAKER: 
+
+EXECUTION:
+
+1. Parse each event as atomic unit: [user_id, timestamp, event_description]
+2. Group events by user_id to create per-user buckets.
+3. Convert ALL timestamps to UTC within each user's bucket.
+   Identify timezone from ISO 8601 format (+09:00, -05:00, Z, etc.)
+   and apply correct offset calculation.
+4. Sort each user's events in ascending UTC timestamp order.
+5. Apply Rule D to resolve any identical UTC timestamps within a
+   user's bucket.
+
+OUTPUT: Per-user buckets, each containing events sorted in ascending
+UTC timestamp order, with user_id binding preserved throughout.
+Ready for Step 2.
+
+---------------------------------------------------------------------
+
+
+STEP 2 — SEMANTIC KERNEL MAPPING
+
+INPUT: Per-user event buckets from Step 1.
+
+RULES:
+
+A. ONE CATEGORY PER EVENT: 
+
+B. CASE-INSENSITIVE MATCHING: 
+
+C. PAYLOAD STRIPPING: 
+
+D. CART POSITIVE ADJUSTMENT: 
+
+E. CART NEGATIVE DISAMBIGUATION: 
+
+F. SESSION END IS NOT SEMANTIC: 
+
+G. MULTI-SESSION THRESHOLD: 
+
+H. RE-ENGAGEMENT VALIDITY: 
+
+I. CART MANIPULATION COLLAPSE: 
+
+CATEGORIES:
+
+Category A — Awareness
+
+Category B — Interest
+
+Category C — Consideration
+
+Category D — Decision
+
+Category E — Purchase
+
+Category F — Abandonment
+
+Category G — Re-engagement
+
+
+EXECUTION:
+
+1. For each event in the user's bucket:
+   a. Strip any payload after the colon.
+   b. Match event name case-insensitively against category event lists.
+   c. Apply Rules E, F, G where context-dependent.
+   d. Assign exactly one category.
+2. Apply Rule G to flag multi-session boundaries within each
+   user's bucket.
+3. Apply Rule I to count add/remove cycles per journey segment.
+
+OUTPUT: Each event annotated with its assigned category.
+        Each user's bucket segmented into journey segments where
+        applicable.
+
+-----------------------------------------------------------------
+
+
+STEP 3 — COLLAPSE ENGINE
+
+INPUT: Per-user event buckets with category annotations from Step 2.
+
+RULES:
+
+A. HIERARCHY: Purchase > Decision > Consideration > Interest > Awareness.
+   Abandonment is a state modifier, not a hierarchy level.
+
+B. STICKY STATE: State persists at the highest level reached until a
+   valid forward transition occurs. State NEVER regresses.
+
+C. FORWARD PROGRESSION ONLY: Awareness → Interest → Consideration →
+   Decision → Purchase. No backwards transitions are permitted except
+   via Abandonment → Re-engagement.
+
+D. TERMINAL STATE: Purchase cannot be overridden. Once a user reaches
+   Purchase within a journey segment, that segment is complete.
+
+E. ABANDONMENT IS NON-DESTRUCTIVE: An Abandonment event never reduces
+   the highest stage already reached. Classification is based on peak
+   state, not terminal state.
+
+F. ABANDONMENT LEVEL: Abandonment level = highest stage reached before
+   the abandonment event. Valid levels: Interest Abandon, Consideration
+   Abandon, Decision Abandon.
+
+G. RE-ENGAGEMENT VALIDITY: Re-engagement is only valid if the user
+   previously reached Consideration or higher. Re-engagement for
+   Awareness-only or Interest-only users is invalid and must be ignored.
+
+H. RE-ENGAGEMENT RESET: Valid re-engagement resets state to Interest.
+   User must progress through the funnel again from Interest to reach
+   higher states.
+
+I. COLLAPSE REPEATED STATES: Multiple consecutive events at the same
+   stage collapse to a single state entry. Exception: if a stage recurs
+   after an Abandonment event, treat it as a new progression entry.
+
+J. CROSS-SEGMENT PEAK: If a user has multiple journey segments (per
+   Step 2 Rule G), final classification = highest stage reached across
+   ALL segments combined.
+
+EXECUTION:
+
+1. For each user's event sequence, initialize state = Awareness.
+2. Process events in chronological order:
+   a. If event category is higher than current state → advance state.
+   b. If event is Category F (Abandonment) → record Abandonment at
+      current level. State is retained at current peak.
+   c. If event is Category G (Re-engagement) → apply Rule G.
+      If valid, reset state to Interest and continue progression.
+   d. If state = Purchase → mark segment complete. Stop processing
+      further events in this segment.
+3. Apply Rule I to collapse repeated states in the state sequence.
+4. Apply Rule J across all segments to determine cross-segment peak.
+5. Record final state sequence as: State1 → State2 → State3 → ...
+
+OUTPUT: Per-user final state sequence and peak stage reached across
+        all journey segments.
+
+-----------------------------------------------------------
+
+
+STEP 4 — CUSTOMER VALUE CLASSIFICATION
+
+INPUT: Per-user peak stage from Step 3.
+
+RULES:
+
+A. CLASSIFICATION IS BASED ON PEAK STATE, NOT TERMINAL STATE.
+   Abandonment events never reduce the highest category reached.
+
+B. HIGH-VALUE: Any user who reached Category C (Consideration) or
+   higher. This includes Converters, Decision Abandoners, and
+   Consideration Abandoners.
+
+C. MEDIUM-VALUE: Any user who reached Category B (Interest) but
+   never reached Category C. No cart action present anywhere in
+   the event sequence.
+
+D. LOW-VALUE: Any user with ONLY Category A (Awareness) events.
+   No Category B or higher events anywhere in the sequence.
+
+E. LOW-VALUE EXCLUSION: LOW-VALUE is ONLY permitted if the user
+   has NO Category B events whatsoever. Any Category B event
+   forces minimum MEDIUM-VALUE. This rule is absolute.
+
+F. MATHEMATICAL EXCLUSION: Interest Abandoners CANNOT be HIGH-VALUE
+   regardless of engagement depth, browsing volume, or product price
+   viewed. Only cart action determines HIGH-VALUE.
+
+G. FORBIDDEN CLASSIFICATIONS: Do NOT create "Potential High Value",
+   "Latent Value", or any speculative tier. Only actual behavioral
+   commitment (cart action) determines HIGH-VALUE.
+
+H. PHASE ISOLATION: Classify ALL users before sorting begins.
+   Sorting operates on the COMPLETE tier set only.
+   Appending to a partially sorted list is FORBIDDEN.
+
+I. FIXED ENTITY COUNT: Total unique user_ids across HIGH, MEDIUM,
+   and LOW must equal total unique buyer count in the dataset.
+   If not, execution has failed.
+
+J. CART-ACTION PRIMACY OVERRIDE (MANDATORY):
+
+
+CART EVENT DETECTION CHECKLIST (MANDATORY):
+
+Before assigning any classification, scan the COMPLETE event
+sequence for ANY of these strings:
+- AddToCart
+- add_to_cart
+- cart_item_added
+- Item_Added_To_Cart
+- cart_updated: qty +X
+
+Do NOT stop scanning after an abandonment event. If ANY cart
+event is found, minimum classification is HIGH-VALUE.
+
+EXECUTION:
+
+1. For each user, scan complete event sequence per checklist above.
+2. Assign classification per Rules B, C, D in priority order.
+3. Verify Rules E and F.
+4. Record classification. Do NOT sort yet.
+5. Repeat for ALL users before proceeding.
+6. Verify Rule I.
+
+OUTPUT: Per-user classification (HIGH/MEDIUM/LOW). Unsorted.
+
+-----------------------------------------------------------------------
+STEP 5 — PER-USER OUTPUT BLOCKS
+
+INPUT: Per-user classifications from Step 4 and event sequences
+from Step 3.
+
+RULES:
+
+A. MANDATORY AND NOT SILENT: Every user MUST have a processing
+   block printed explicitly. Silent processing is FORBIDDEN.
+
+B. ALL USERS FIRST: Complete ALL per-user blocks before proceeding
+   to Step 6. Do NOT interleave with aggregated output.
+
+C. ORDER: Process users in ascending lexicographic order by user_id.
+   Same ASCII byte-wise ordering as Step 6. Do NOT sort tier lists
+   here — that happens in Step 6.
+
+D. NO COMMENTARY: No reasoning, explanation, or prose outside the
+   defined block structure.
+
+EXECUTION:
+
+For each user output EXACTLY this structure, nothing more:
+
+USER: [user_id]
+TIMEZONE: [original timezone offset from raw data, e.g. +09:00]
+
+CHRONOLOGICAL EVENT SEQUENCE (UTC):
+[UTC_timestamp] | [raw_event] | [Category A/B/C/D/E/F/G] | [Stage]
+
+FINAL STATE SEQUENCE: State1 → State2 → State3 → ...
+PEAK STAGE: [Consideration / Interest / Awareness]
+HIGHEST CATEGORY EVENT: [event_name] → Category [A/B/C/D/E]
+EVENTS SCANNED: [total raw event count for this user]
+CUSTOMER VALUE: [HIGH / MEDIUM / LOW]
+
+---
+
+FIELD DEFINITIONS:
+
+TIMEZONE: Echo the original offset exactly as it appears in the
+raw data. If a user has multiple timezones across events, echo
+the first one observed.
+
+CHRONOLOGICAL EVENT SEQUENCE: One row per event, ascending UTC
+order. Stage column = funnel stage active after this event is
+processed.
+
+FINAL STATE SEQUENCE: Collapsed state sequence from Step 3.
+Format: State1 → State2 → State3. No repeated consecutive states
+unless separated by Abandonment.
+
+PEAK STAGE: The minimum funnel stage that determined the
+classification tier. HIGH = always Consideration. MEDIUM = always
+Interest. LOW = always Awareness.
+
+HIGHEST CATEGORY EVENT: The LAST event in the sequence mapping
+to the highest category reached. Echo event name only, strip
+any payload after the colon.
+
+EVENTS SCANNED: Total raw event rows belonging to this user
+in the dataset, before any normalization.
+
+OUTPUT: All per-user blocks printed and complete. Ready for Step 6.
+
+-----------------------------------------------------------
+
+STEP 6 — AGGREGATED ANALYSIS
+
+INPUT: Per-user classifications from Step 4. Per-user blocks
+already printed in Step 5.
+
+RULES:
+
+A. PHASE ISOLATION: Step 5 must be fully complete before Step 6
+   begins. Do NOT sort or aggregate during per-user processing.
+
+B. CANONICAL ORDERING: Sort each tier's user_ids using ascending
+   lexicographic order, byte-wise ASCII, case-sensitive,
+   character-by-character ONLY (see GLOBAL OUTPUT CONSTRAINTS Rule 9).
+   Do NOT interpret suffixes as hex or numeric values.
+   Example: user_5r9w7 < user_7d3a1 because '5' (53) < '7' (55).
+
+C. SORT EXACTLY ONCE: Apply sorting once per tier. The result is
+   the CANONICAL LIST. Do NOT re-sort, reconstruct, or reformat
+   after this point.
+
+D. SINGLE SOURCE OF TRUTH: The CANONICAL LIST is the ONLY valid
+   source for output display and hash construction in Step 7.
+   Both must reference the same list. No reconstruction allowed.
+
+E. FIXED ENTITY COUNT: Total user_ids across all three tiers must
+   equal total unique buyer count in the dataset. If not, execution
+   has failed.
+
+F. LIST FORMAT (MANDATORY):
+   - Count and list MUST appear on separate lines.
+   - Count on first line, list on second line. Never on same line.
+   - List format EXACTLY: [user_id_1,user_id_2,...,user_id_n]
+   - No spaces. No trailing comma. No line breaks inside list.
+   - Empty tier MUST be: []
+
+EXECUTION:
+
+1. Collect all user_ids for each tier into a SET.
+2. Verify Rule E.
+3. Convert each SET to a LIST and sort per Rule B exactly once.
+4. Render output block exactly as specified below.
+5. Proceed to Step 7. Do NOT compute hash here.
+
+OUTPUT:
+
+=== AGGREGATED ANALYSIS ===
+
+HIGH-VALUE CUSTOMERS: [count]
+[user_id_1,user_id_2,...,user_id_n]
+
+MEDIUM-VALUE CUSTOMERS: [count]
+[user_id_1,user_id_2,...,user_id_n]
+
+LOW-VALUE CUSTOMERS: [count]
+[]
+
+HASH INPUT: "HIGH:[<HIGH_LIST>]|MEDIUM:[<MEDIUM_LIST>]|LOW:[<LOW_LIST>]"
+
+CONVERGENCE HASH:
+[64 character SHA-256 hex, lowercase, no prefix]
+
+
