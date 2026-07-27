@@ -55,7 +55,7 @@ The engineering objective is to reduce observable interpretive multiplicity unti
 For example:
 
 ```text
-Same unchanged input across 10 runs:
+Same unchanged input across 10 runs produces:
 
 HIGH
 MEDIUM
@@ -67,10 +67,10 @@ MEDIUM
 
 This reveals at least three observable decision classes.
 
-The target state is:
+The target state is for example:
 
 ```text
-Same unchanged input across 10 runs:
+Same unchanged input across 10 runs with substrate produces:
 
 HIGH
 HIGH
@@ -80,7 +80,7 @@ HIGH
 ...
 ```
 
-Here, the evaluated models consistently conform to one canonical operational decision.
+Here, the evaluated models consistently conform to one canonical operational decision that is defined as "ground truth" and correct.
 
 There is not yet an established universal threshold for how many runs are sufficient to characterize interpretive multiplicity. The required test matrix should depend on task complexity, the number of admissible outputs, the number of decision paths, and the operational risk of an undetected divergence.
 
