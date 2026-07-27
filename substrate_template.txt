@@ -1,0 +1,132 @@
+SUBSTRATE TEMPLATE
+Version: [VERSION]
+Task: [TASK NAME]
+
+PURPOSE
+
+Apply one invariant task specification to variable input data and produce
+a canonical structured output suitable for cross-model comparison.
+
+The substrate defines the task ontology, admissible transformations,
+decision boundaries, and canonical output format. It does not provide
+the classifications or answers for any specific input entity.
+
+EXECUTION REQUIREMENT
+
+Execute the stages below in strict order.
+
+Do not proceed to the next stage until the current stage is complete.
+
+STAGE 1: INPUT NORMALIZATION
+
+Define:
+
+- the atomic input record;
+- entity identity rules;
+- timestamp normalization;
+- ordering rules;
+- tie-breaking rules;
+- immutability constraints;
+- missing-data handling.
+
+Required output:
+
+A normalized, deterministically ordered collection of records grouped by
+entity.
+
+STAGE 2: SEMANTIC MAPPING
+
+Define:
+
+- the closed semantic category set;
+- the mapping from raw observations to categories;
+- matching and normalization rules;
+- contextual disambiguation rules;
+- invalid or ignorable observations;
+- repeated-event handling;
+- segmentation rules.
+
+Required output:
+
+Each normalized observation assigned to exactly one admissible semantic
+category.
+
+STAGE 3: STATE TRANSITION
+
+Define:
+
+- the ordered state space;
+- permitted transitions;
+- forbidden transitions;
+- sticky or persistent states;
+- terminal states;
+- reset conditions;
+- cross-segment aggregation;
+- repeated-state collapse.
+
+Required output:
+
+A deterministic state sequence and final or peak state for each entity.
+
+STAGE 4: DECISION CLASSIFICATION
+
+Define:
+
+- the closed output classes;
+- the conditions for each class;
+- precedence between rules;
+- exclusion conditions;
+- minimum and maximum class constraints;
+- treatment of conflicting evidence;
+- entity-count invariants.
+
+Required output:
+
+Exactly one admissible classification for every entity.
+
+STAGE 5: ENTITY-LEVEL ARTIFACT
+
+For each entity, emit a canonical record containing:
+
+- entity identifier;
+- normalized observations;
+- semantic categories;
+- state sequence;
+- classification;
+- validation metadata.
+
+The exact field order and serialization rules must be fixed in advance.
+
+STAGE 6: AGGREGATION
+
+Define:
+
+- grouping by output class;
+- deterministic entity ordering;
+- duplicate handling;
+- completeness checks;
+- empty-class representation;
+- canonical list formatting.
+
+Required output:
+
+One canonical aggregate artifact derived from the complete entity-level
+classification set.
+
+STAGE 7: CANONICALIZATION AND HASHING
+
+Define:
+
+- the exact canonical serialization;
+- whitespace rules;
+- character encoding;
+- ordering rules;
+- capitalization;
+- delimiter format;
+- hash algorithm.
+
+Required output:
+
+- canonical hash input;
+- lowercase SHA-256 digest;
+- no explanatory prose outside the declared output format.
