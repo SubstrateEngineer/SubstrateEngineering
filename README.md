@@ -214,6 +214,28 @@ A task-level substrate should continue to induce the same interpretation rules w
 
 The goal is not necessarily to reproduce the same customer classifications or the same hash on a new dataset. The goal is to preserve the same operational semantics and recover cross-model convergence on the new canonical artifact.
 
+## Why this is not circular
+
+The convergence criterion is not circular because the substrate does not encode the expected answer for each dataset instance. It defines the procedure by which admissible outputs are produced.
+
+A clearer analogy is a production line built to manufacture one specified car model, for example a Ford Mustang.
+
+Every worker receives the same standard operating procedure. The individual parts entering the line may vary by batch, supplier, serial number, or production date, but the finished vehicle must still conform to the same Mustang specification.
+
+If the SOP is complete and understood consistently, different workers can process different parts and still produce vehicles that conform to the same canonical product.
+
+If the SOP is underspecified, one worker may install one component, another may interpret the instruction differently, and a third may follow a different assembly order. All may believe they followed the procedure, yet the line produces inconsistent vehicles instead of the one car model it was designed to manufacture.
+
+The same principle applies to autonomous and multi-agent systems. Their purpose is not merely to generate plausible artifacts. It is to execute one shared specification consistently across independently operating agents.
+
+The substrate functions as the semantic SOP. Different models, runs, and datasets may supply different inputs, but the same task meaning, transition rules, precedence rules, and acceptance criteria must be applied consistently. Otherwise, the system that aim for Mustang may get Cameros on some production runs. 
+
+Convergence on one dataset establishes an initial reference state. Transfer testing then changes the customer identities, values, event sequences, prices, and behavioral patterns while holding the substrate unchanged. If convergence persists, the substrate is governing the task rather than reproducing memorized answers.
+
+The canonical artifact is not selected first and then inserted into the substrate. The admissibility rules are defined first, and the artifact is derived by applying them to the data.
+
+Substrate Engineering is the process of turning an underspecified semantic SOP into one that independently operating models understand and execute consistently, so that the production line produces one canonical product rather than incompatible artifacts.
+
 ---
 
 ## Failure interpretation
@@ -269,4 +291,3 @@ Does the same interpretation hold on new datasets?
 Correctness:
 Are the declared admissibility rules appropriate for the domain?
 ```
-
