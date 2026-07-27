@@ -1,0 +1,1 @@
+classify buyer to high, medium, low
