@@ -242,10 +242,11 @@ The substrate is then refined and retested.
 The initial construction phase is complete when:
 
 * at least three heterogeneous model families;
-* in one independent invocation each;
-* under the same unchanged task specification;
+* in a single independent fresh invocation each;
+* under the same unchanged task specification; Here "classify buyer to high, medium, low"
 * produce the same canonical artifact;
-* with the same SHA-256 digest.
+* validated through matching SHA-256 digest.
+
 
 Repeated-run testing then evaluates persistence.
 
