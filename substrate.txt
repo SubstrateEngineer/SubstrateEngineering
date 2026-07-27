@@ -126,39 +126,25 @@ RULES:
 A. HIERARCHY: Purchase > Decision > Consideration > Interest > Awareness.
    Abandonment is a state modifier, not a hierarchy level.
 
-B. STICKY STATE: State persists at the highest level reached until a
-   valid forward transition occurs. State NEVER regresses.
+B. STICKY STATE: 
 
 C. FORWARD PROGRESSION ONLY: Awareness → Interest → Consideration →
    Decision → Purchase. No backwards transitions are permitted except
    via Abandonment → Re-engagement.
 
-D. TERMINAL STATE: Purchase cannot be overridden. Once a user reaches
-   Purchase within a journey segment, that segment is complete.
+D. TERMINAL STATE: 
 
-E. ABANDONMENT IS NON-DESTRUCTIVE: An Abandonment event never reduces
-   the highest stage already reached. Classification is based on peak
-   state, not terminal state.
+E. ABANDONMENT IS NON-DESTRUCTIVE: 
 
-F. ABANDONMENT LEVEL: Abandonment level = highest stage reached before
-   the abandonment event. Valid levels: Interest Abandon, Consideration
-   Abandon, Decision Abandon.
+F. ABANDONMENT LEVEL: 
 
-G. RE-ENGAGEMENT VALIDITY: Re-engagement is only valid if the user
-   previously reached Consideration or higher. Re-engagement for
-   Awareness-only or Interest-only users is invalid and must be ignored.
+G. RE-ENGAGEMENT VALIDITY: 
 
-H. RE-ENGAGEMENT RESET: Valid re-engagement resets state to Interest.
-   User must progress through the funnel again from Interest to reach
-   higher states.
+H. RE-ENGAGEMENT RESET: 
 
-I. COLLAPSE REPEATED STATES: Multiple consecutive events at the same
-   stage collapse to a single state entry. Exception: if a stage recurs
-   after an Abandonment event, treat it as a new progression entry.
+I. COLLAPSE REPEATED STATES: 
 
-J. CROSS-SEGMENT PEAK: If a user has multiple journey segments (per
-   Step 2 Rule G), final classification = highest stage reached across
-   ALL segments combined.
+J. CROSS-SEGMENT PEAK: 
 
 EXECUTION:
 
@@ -190,52 +176,15 @@ RULES:
 A. CLASSIFICATION IS BASED ON PEAK STATE, NOT TERMINAL STATE.
    Abandonment events never reduce the highest category reached.
 
-B. HIGH-VALUE: Any user who reached Category C (Consideration) or
-   higher. This includes Converters, Decision Abandoners, and
-   Consideration Abandoners.
-
-C. MEDIUM-VALUE: Any user who reached Category B (Interest) but
-   never reached Category C. No cart action present anywhere in
-   the event sequence.
-
-D. LOW-VALUE: Any user with ONLY Category A (Awareness) events.
-   No Category B or higher events anywhere in the sequence.
-
-E. LOW-VALUE EXCLUSION: LOW-VALUE is ONLY permitted if the user
-   has NO Category B events whatsoever. Any Category B event
-   forces minimum MEDIUM-VALUE. This rule is absolute.
-
-F. MATHEMATICAL EXCLUSION: Interest Abandoners CANNOT be HIGH-VALUE
-   regardless of engagement depth, browsing volume, or product price
-   viewed. Only cart action determines HIGH-VALUE.
-
-G. FORBIDDEN CLASSIFICATIONS: Do NOT create "Potential High Value",
-   "Latent Value", or any speculative tier. Only actual behavioral
-   commitment (cart action) determines HIGH-VALUE.
-
-H. PHASE ISOLATION: Classify ALL users before sorting begins.
-   Sorting operates on the COMPLETE tier set only.
-   Appending to a partially sorted list is FORBIDDEN.
-
-I. FIXED ENTITY COUNT: Total unique user_ids across HIGH, MEDIUM,
-   and LOW must equal total unique buyer count in the dataset.
-   If not, execution has failed.
-
+B. HIGH-VALUE: 
+C. MEDIUM-VALUE: 
+D. LOW-VALUE: 
+E. LOW-VALUE EXCLUSION: 
+F. MATHEMATICAL EXCLUSION: 
+G. FORBIDDEN CLASSIFICATIONS: 
+H. PHASE ISOLATION:
+I. FIXED ENTITY COUNT: 
 J. CART-ACTION PRIMACY OVERRIDE (MANDATORY):
-
-
-CART EVENT DETECTION CHECKLIST (MANDATORY):
-
-Before assigning any classification, scan the COMPLETE event
-sequence for ANY of these strings:
-- AddToCart
-- add_to_cart
-- cart_item_added
-- Item_Added_To_Cart
-- cart_updated: qty +X
-
-Do NOT stop scanning after an abandonment event. If ANY cart
-event is found, minimum classification is HIGH-VALUE.
 
 EXECUTION:
 
@@ -256,18 +205,9 @@ from Step 3.
 
 RULES:
 
-A. MANDATORY AND NOT SILENT: Every user MUST have a processing
-   block printed explicitly. Silent processing is FORBIDDEN.
-
-B. ALL USERS FIRST: Complete ALL per-user blocks before proceeding
-   to Step 6. Do NOT interleave with aggregated output.
-
-C. ORDER: Process users in ascending lexicographic order by user_id.
-   Same ASCII byte-wise ordering as Step 6. Do NOT sort tier lists
-   here — that happens in Step 6.
-
-D. NO COMMENTARY: No reasoning, explanation, or prose outside the
-   defined block structure.
+A.
+B.
+C.
 
 EXECUTION:
 
@@ -301,14 +241,6 @@ FINAL STATE SEQUENCE: Collapsed state sequence from Step 3.
 Format: State1 → State2 → State3. No repeated consecutive states
 unless separated by Abandonment.
 
-PEAK STAGE: The minimum funnel stage that determined the
-classification tier. HIGH = always Consideration. MEDIUM = always
-Interest. LOW = always Awareness.
-
-HIGHEST CATEGORY EVENT: The LAST event in the sequence mapping
-to the highest category reached. Echo event name only, strip
-any payload after the colon.
-
 EVENTS SCANNED: Total raw event rows belonging to this user
 in the dataset, before any normalization.
 
@@ -323,27 +255,11 @@ already printed in Step 5.
 
 RULES:
 
-A. PHASE ISOLATION: Step 5 must be fully complete before Step 6
-   begins. Do NOT sort or aggregate during per-user processing.
-
-B. CANONICAL ORDERING: Sort each tier's user_ids using ascending
-   lexicographic order, byte-wise ASCII, case-sensitive,
-   character-by-character ONLY (see GLOBAL OUTPUT CONSTRAINTS Rule 9).
-   Do NOT interpret suffixes as hex or numeric values.
-   Example: user_5r9w7 < user_7d3a1 because '5' (53) < '7' (55).
-
-C. SORT EXACTLY ONCE: Apply sorting once per tier. The result is
-   the CANONICAL LIST. Do NOT re-sort, reconstruct, or reformat
-   after this point.
-
-D. SINGLE SOURCE OF TRUTH: The CANONICAL LIST is the ONLY valid
-   source for output display and hash construction in Step 7.
-   Both must reference the same list. No reconstruction allowed.
-
-E. FIXED ENTITY COUNT: Total user_ids across all three tiers must
-   equal total unique buyer count in the dataset. If not, execution
-   has failed.
-
+A. PHASE ISOLATION: 
+B. CANONICAL ORDERING: 
+C. SORT EXACTLY ONCE: 
+D. SINGLE SOURCE OF TRUTH: 
+E. FIXED ENTITY COUNT: 
 F. LIST FORMAT (MANDATORY):
    - Count and list MUST appear on separate lines.
    - Count on first line, list on second line. Never on same line.
